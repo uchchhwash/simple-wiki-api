@@ -21,18 +21,3 @@ const Article = mongoose.model("Article", articleSchema);
 
 exports.db = db;
 exports.Article = Article;
-
-// exports.getAllArticle = function() {
-//     db.connect();
-//     let test = [];
-
-//     let foundData = Article.find({}, function(err, data) {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             test = data;
-//             db.close();
-//         }
-//     })
-//     return test;
-// }

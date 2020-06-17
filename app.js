@@ -13,11 +13,22 @@ app.get("/articles", function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            console.log(data);
+            res.send(data)
             model.db.close()
         }
     })
+})
 
+app.post("/articles", function(req, res) {
+    model.db.connect();
+
+    const newArticle = new model.Article({
+        title: req.body.title,
+        content: req.body.content
+    })
+
+    newArticle.save();
+    res.send("Success");
 })
 
 
