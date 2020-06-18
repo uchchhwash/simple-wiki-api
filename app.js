@@ -41,7 +41,21 @@ app.route("/articles")
             res.send("Collection Deleted Successfully");
         }
     })
-})
+});
+
+
+
+app.route("/articles/:articleTitle")
+
+.get(function(req, res) {
+    console.log(req.params)
+    model.Article.find({ title: req.params.articleTitle }, function(err, data) {
+        res.send(data)
+    })
+});
+
+// app.route("/articles:/articleTitle")
+
 
 app.listen(3000, function() {
     console.log("server is running on http://localhost:3000")
