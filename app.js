@@ -6,7 +6,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }))
 model.db.connect();
 
-app.get("/articles", function(req, res) {
+app.route("/articles")
+
+.get(function(req, res) {
 
     let allArticles = [];
 
@@ -20,7 +22,7 @@ app.get("/articles", function(req, res) {
     })
 })
 
-app.post("/articles", function(req, res) {
+.post(function(req, res) {
     const newArticle = new model.Article({
         title: req.body.title,
         content: req.body.content
@@ -30,7 +32,7 @@ app.post("/articles", function(req, res) {
     res.send("Success");
 })
 
-app.delete("/articles", function(req, res) {
+.delete(function(req, res) {
     model.Article.deleteMany({}, function(err) {
         if (err) {
             console.log(err);
