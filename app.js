@@ -70,8 +70,29 @@ app.route("/articles/:articleTitle")
                 res.send("Update Article Failed");
             }
         }
-
     )
+})
+
+.patch(function(req, res) {
+    model.Article.update({ title: req.params.articleTitle }, { $set: req.body },
+        function(err, result) {
+            if (!err) {
+                res.send("Updated Article");
+            } else {
+                res.send("Update Article Failed");
+            }
+        }
+    )
+})
+
+.delete(function(req, res) {
+    model.Article.findOneAndDelete({ title: req.params.articleTitle }, function(err, result) {
+        if (!err) {
+            res.send("Deleted Article");
+        } else {
+            res.send("Delete Article Failed");
+        }
+    })
 });
 
 app.listen(3000, function() {
