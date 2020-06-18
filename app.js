@@ -48,14 +48,31 @@ app.route("/articles")
 app.route("/articles/:articleTitle")
 
 .get(function(req, res) {
-    console.log(req.params)
     model.Article.find({ title: req.params.articleTitle }, function(err, data) {
-        res.send(data)
+
+        if (!err) {
+            res.send(data);
+        } else {
+            res.send(err);
+        }
     })
+})
+
+.put(function(req, res) {
+    model.Article.update({ title: req.params.articleTitle }, {
+            title: req.body.title,
+            content: req.body.content
+        }, { overwrite: true },
+        function(err, result) {
+            if (!err) {
+                res.send("Updated Article");
+            } else {
+                res.send("Update Article Failed");
+            }
+        }
+
+    )
 });
-
-// app.route("/articles:/articleTitle")
-
 
 app.listen(3000, function() {
     console.log("server is running on http://localhost:3000")
